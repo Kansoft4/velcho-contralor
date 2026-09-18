@@ -9,7 +9,7 @@
    Esa URL es un punto de entrada público, no una credencial: solo permite
    ejecutar doPost y no da acceso a la hoja. Sigue en pie la regla de no poner
    tokens ni secretos de webhook en este archivo. */
-const FEEDBACK_ENDPOINT = '';
+const FEEDBACK_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzv_4030gQYlIsRRB5XUkbWpZLytKfrTd9yt0nx8kmPPIzED9L0wx8VcESrK3adO66paQ/exec';
 
 (() => {
   const form = document.querySelector('#feedback-form');
