@@ -132,6 +132,14 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   Sebastián. Si vuelve a mandar una versión nueva, mandan esos PDF: han
   cambiado de una versión a otra (por ejemplo, en la 04 pasó de «reúno los
   pedidos y los entrego» a «consigo el precio, no compro»).
+- **Nada visual puede depender de `mix-blend-mode` ni de `mask-composite`.**
+  Safari no los aplica aquí, y el sitio se veía con rectángulos de otro tono
+  alrededor del retrato del hero y de la frase «Nadie te obliga a pagar».
+  La regla ahora es: si una imagen tiene que integrarse al fondo, su papel se
+  corrige **en el archivo** (tono igual a `--paper` y bordes que se desvanecen
+  a transparente), no con CSS.
+- Los símbolos `↗ ↘ ↙ ✳` llevan `&#xFE0E;` detrás. Sin eso, iOS los pinta como
+  emoji a color. Si se agrega otra flecha de ese rango, ponerle el mismo sufijo.
 - El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
   decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
   su póster (`proposals-motion.js`, al final). No devolverle el atributo

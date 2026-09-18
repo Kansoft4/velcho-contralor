@@ -1,7 +1,7 @@
 /* Paleta elegida: azul, naranja, amarillo, morado y blanco. */
 :root{--paper:#eae5dc;--white:#FAFAF2;--blue:#0B2F77;--orange:#FF6A00;--ink:#0B2F77;--purple:#4A0090;--yellow:#FFC400}
 .statement-section{isolation:isolate;background:var(--paper)}
-.statement-art{mix-blend-mode:multiply;filter:brightness(1.1) contrast(1.08);mask-image:linear-gradient(to right,transparent,#000 2%,#000 98%,transparent),linear-gradient(to bottom,transparent,#000 3%,#000 97%,transparent);mask-composite:intersect}
+.statement-art{display:block}
 .about-section{padding-top:0}
 .story-scroll-enabled{isolation:isolate;position:relative}
 .story-scroll-enabled .story-poster{position:sticky;top:var(--story-top,0px);z-index:var(--story-layer,1);min-height:100svh}

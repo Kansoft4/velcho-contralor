@@ -8,9 +8,9 @@
 .masthead{position:absolute;inset:26px 4.5vw auto;display:flex;justify-content:space-between;gap:20px;font:600 11px/1.4 monospace;letter-spacing:.11em;z-index:2}
 .poster{position:relative;width:min(94vw,calc((100svh - 150px)*1.777));aspect-ratio:1672/941;flex:none}
 .fallback{display:block;width:100%;height:auto}.pieces{display:none;position:absolute;inset:0}.is-ready .pieces{display:block}.is-ready .fallback{visibility:hidden}
-.sprite{position:absolute;overflow:hidden;transform-origin:center;will-change:transform,opacity;filter:brightness(1.13) contrast(1.05);mix-blend-mode:multiply}
+.sprite{position:absolute;overflow:hidden;transform-origin:center;will-change:transform,opacity}
 .sprite img{display:block;position:absolute;max-width:none;height:auto;pointer-events:none;user-select:none}
-.sprite.phrase{overflow:visible;filter:none;mix-blend-mode:normal}
+.sprite.phrase{overflow:visible}
 .scroll-cue{position:absolute;bottom:26px;left:4.5vw;right:4.5vw;display:flex;justify-content:space-between;align-items:center;font:600 11px/1.4 monospace;letter-spacing:.13em;will-change:opacity}.scroll-cue span:last-child{font:400 28px/1 Arial}
 .scene-meter{position:absolute;bottom:0;left:0;width:100%;height:3px;z-index:5;transform-origin:left}.scene-meter span{display:block;height:100%;background:var(--orange);transform:scaleX(0);transform-origin:left}
 .wipe{position:absolute;inset:0;background:var(--blue);clip-path:circle(0% at 70% 70%);pointer-events:none;z-index:3;will-change:clip-path}
@@ -28,7 +28,7 @@
 .about-intro{max-width:390px;margin:52px 0 0;font-size:clamp(19px,1.6vw,25px);line-height:1.45;letter-spacing:-.025em}
 .about-intro strong{font-weight:800}
 .about-portrait{position:relative;margin:0 0 0 -4vw;align-self:end;min-width:0}
-.about-portrait>img{position:relative;display:block;width:100%;height:auto;max-height:700px;object-fit:contain;mix-blend-mode:multiply;z-index:1;transform:rotate(4deg)}
+.about-portrait>img{position:relative;display:block;width:100%;height:auto;max-height:700px;object-fit:contain;z-index:1;transform:rotate(4deg)}
 .portrait-sun{position:absolute;top:-2%;right:-8%;color:var(--orange);font:400 clamp(150px,20vw,320px)/1 Georgia,serif;transform:rotate(12deg)}
 .about-portrait figcaption{position:absolute;right:0;bottom:4%;z-index:2;transform:rotate(-6deg);padding:12px 17px;background:var(--orange);color:var(--paper);font:900 clamp(14px,1.45vw,22px)/1.05 Arial,sans-serif;letter-spacing:-.035em}
 .about-portrait figcaption span{position:absolute;right:12px;top:-42px;color:var(--orange);font-size:46px}
