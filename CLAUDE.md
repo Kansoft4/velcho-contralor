@@ -81,22 +81,29 @@ tocó). La carga inicial —el hero, lo único que no es `lazy`— bajó de 6,4 
 Si se agrega arte nuevo, convertirlo igual:
 `cwebp -q 85 -alpha_q 100 -m 6 imagen.png -o imagen.webp`
 
-### 3. Publicar
+### 3. Publicar ✅ hecho
 
-Decisión tomada: **el VPS propio de Sebastián**. Todavía no hay repositorio git.
+**En línea: https://kansoft4.github.io/velcho-contralor/**
+Repositorio público: https://github.com/Kansoft4/velcho-contralor
 
-Como el sitio es estático, basta con copiar `site/` al servidor. Para que cargue
-rápido de verdad, en el servidor web hacen falta tres cosas que el peso de los
-archivos por sí solo no da:
+Cada push a `main` dispara `.github/workflows/pages.yml`, que sube **solo
+`site/`** a GitHub Pages. Comprobado: `notas/`, `CLAUDE.md` y `README.md`
+responden 404 en la web. GitHub Pages ya sirve gzip y fuerza HTTPS, así que las
+tres cosas de rendimiento que hacían falta quedaron resueltas sin configurar
+nada.
 
-- **Compresión** (gzip o brotli) para el HTML, el CSS y el JS. Las imágenes ya
-  vienen comprimidas; no hay que recomprimirlas.
-- **Cabeceras de caché largas** para `assets/` (`Cache-Control: max-age=31536000,
-  immutable`) y corta para `index.html`. Los CSS y JS ya se rompen con `?v=N`.
-- **HTTPS con HTTP/2**, que además hace barata la cantidad de imágenes.
+Fuera del repositorio quedan las imágenes pesadas (`assets-originales/`,
+`assets-sin-usar/`, `alternativas-poster/`, 72 MB); están en el Mac y en
+`.gitignore`.
 
-Antes de publicar conviene revisar: `<title>`, meta description, favicon
-y una imagen Open Graph, porque el enlace se va a compartir por WhatsApp.
+Ya resuelto antes de publicar: `<title>`, meta description, favicon, icono de
+pantalla de inicio e imagen Open Graph (`site/assets/og.jpg`, 1200×630) para que
+el enlace se vea bien al compartirlo por WhatsApp.
+
+**Si más adelante se pasa al VPS:** copiar `site/` y configurar en el servidor
+gzip o brotli para HTML/CSS/JS, `Cache-Control: max-age=31536000, immutable`
+para `assets/`, y HTTPS con HTTP/2. Habría que actualizar `og:url`, `og:image`
+y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
 
 ---
 
