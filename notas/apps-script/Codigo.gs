@@ -45,6 +45,13 @@ function doGet() {
   return responder({ ok: true, mensaje: 'Buzón activo' });
 }
 
+/** Envuelve cualquier objeto como respuesta JSON. */
+function responder(datos) {
+  return ContentService
+    .createTextOutput(JSON.stringify(datos))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
 function hoja() {
   const libro = SpreadsheetApp.getActiveSpreadsheet();
   let pestana = libro.getSheetByName(NOMBRE_PESTANA);
