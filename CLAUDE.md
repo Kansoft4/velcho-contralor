@@ -125,7 +125,13 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   cambias el arte, actualiza también ese texto.
 - Los textos de las propuestas describen mejoras **por hacer**, no cosas
   ya implementadas. Mantener ese tiempo verbal: es una campaña, no un
-  informe de gestión.
+  informe de gestión. **Excepción: la propuesta 01** (el tablero) va en
+  presente y su desplegable dice «¿Cómo funciona?», porque el tablero ya
+  está construido — el video de esa propuesta es el real.
+- El contenido de las seis propuestas sale de los PDF de campaña de
+  Sebastián. Si vuelve a mandar una versión nueva, mandan esos PDF: han
+  cambiado de una versión a otra (por ejemplo, en la 04 pasó de «reúno los
+  pedidos y los entrego» a «consigo el precio, no compro»).
 - El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
   decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
   su póster (`proposals-motion.js`, al final). No devolverle el atributo
