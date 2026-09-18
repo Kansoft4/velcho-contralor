@@ -1,0 +1,13 @@
+# Imágenes pesadas que se quedan solo en el Mac (72 MB).
+# Los originales sin comprimir del arte que sí está en uso viven en
+# notas/assets-originales/; si se rehace el arte, se sacan de ahí.
+notas/assets-originales/
+notas/assets-sin-usar/
+notas/alternativas-poster/
+
+# Basura del sistema
+.DS_Store
+._*
+
+# Configuración local de Claude Code
+.claude/settings.local.json

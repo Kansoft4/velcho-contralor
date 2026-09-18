@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Que la plata se vea">
+  <rect width="64" height="64" fill="#eae5dc"/>
+  <text x="32" y="33" fill="#f04416" font-family="Helvetica,Arial,sans-serif" font-size="56"
+        font-weight="700" text-anchor="middle" dominant-baseline="central">$</text>
+</svg>

@@ -1,0 +1,125 @@
+# Sitio de campaña — Contraloría Estudiantil (Colegio Jefferson)
+
+Sitio estático de una sola página. Lema: **QUE LA PLATA SE VEA**.
+Construido con Codex; falta terminarlo y publicarlo.
+
+## Estructura
+
+```
+site/     ← esto y solo esto se publica
+  index.html
+  styles.css · art-direction.css · proposals.css · feedback.css
+  scroll.js · story-scroll.js · proposals-motion.js · feedback.js
+  assets/  (9,6 MB — todo en WebP, salvo el .mp4)
+notas/    ← NO se publica
+  INTEGRACION.md        documentación completa del sitio (versiones 1 a 23)
+  PROMPT*.md            prompts exactos de cada imagen generada
+  apps-script/          backend del formulario + cómo publicarlo
+  alternativas-poster/  variantes de póster descartadas
+  assets-sin-usar/      versiones viejas de imágenes, ya no referenciadas
+  assets-originales/    los PNG/JPG sin comprimir (41 MB), por si se rehace el arte
+```
+
+Previsualizar: `cd site && python3 -m http.server 8766` → http://127.0.0.1:8766
+
+**Ojo con el puerto 8765:** suele haber ahí un servidor apuntando a
+`~/Documents/Codex/2026-09-17/qu/outputs/scroll-hero`, que es la carpeta vieja
+de Codex de donde salió este proyecto. Es una copia anterior —todavía tiene el
+`<select>` malformado— y editarla no afecta a `site/`. La copia buena es esta.
+
+Secciones de la página, en orden: hero animado por scroll → frase → tres
+historias (Canadá, deporte, tecnología) → seis propuestas con desplegables →
+formulario → pie. Todo responde a `prefers-reduced-motion` y funciona sin JS.
+Los detalles de cada animación están en `notas/INTEGRACION.md`.
+
+---
+
+## Lo que falta
+
+### 1. Conectar el formulario ← falta un paso, en Google
+
+Decisión tomada: las respuestas van a una **hoja de Google**. El enlace a la
+hoja no se guarda en el repositorio, que es público; lo tiene Sebastián.
+
+Del lado del sitio ya está todo hecho y probado contra un servidor que imita el
+contrato de Apps Script: el formulario envía, recibe `{ok:true}` y muestra
+«¡Tu idea llegó!».
+
+Lo que falta es publicar el backend desde la cuenta de Google de Sebastián:
+
+- Código listo para pegar: `notas/apps-script/Codigo.gs`
+- Pasos: `notas/apps-script/COMO-PUBLICAR.md`
+- Después, pegar la URL `/exec` en `site/feedback.js` línea 12.
+
+Mientras `FEEDBACK_ENDPOINT` siga vacío, el botón queda deshabilitado y el sitio
+muestra «Este buzón todavía no recibe mensajes» — que es el estado actual.
+
+Dos cosas que no hay que romper:
+
+- `feedback.js` envía `Content-Type: text/plain`, **no** `application/json`.
+  Apps Script no contesta la petición *preflight* de CORS; con
+  `application/json` el formulario deja de funcionar desde el navegador.
+- La regla sigue: ningún token ni secreto en `feedback.js`. La URL `/exec` sí
+  puede ir ahí — es un punto de entrada público, no una credencial.
+
+### 2. Comprimir las imágenes ✅ hecho
+
+`site/assets/` pasó de **44 MB a 9,6 MB** (2,7 MB de eso es el video, que no se
+tocó). La carga inicial —el hero, lo único que no es `lazy`— bajó de 6,4 MB a
+1 MB.
+
+- Todo en WebP: `q=85` para el arte, `q=82` para las fotos, sin pérdida para el
+  logo. El alfa se guardó con `-alpha_q 100`: la transparencia del lettering
+  recortado quedó **idéntica bit a bit** (PSNR ∞).
+- Solo se redimensionó una imagen: `amigos-winnipeg` (4160 px → 1600 px). El
+  resto conserva su resolución original; no hacía falta bajarla para llegar al
+  peso.
+- Los originales están completos en `notas/assets-originales/`.
+- Verificado en el navegador: las 26 imágenes cargan, sin 404 ni errores de
+  consola.
+
+Si se agrega arte nuevo, convertirlo igual:
+`cwebp -q 85 -alpha_q 100 -m 6 imagen.png -o imagen.webp`
+
+### 3. Publicar
+
+Decisión tomada: **el VPS propio de Sebastián**. Todavía no hay repositorio git.
+
+Como el sitio es estático, basta con copiar `site/` al servidor. Para que cargue
+rápido de verdad, en el servidor web hacen falta tres cosas que el peso de los
+archivos por sí solo no da:
+
+- **Compresión** (gzip o brotli) para el HTML, el CSS y el JS. Las imágenes ya
+  vienen comprimidas; no hay que recomprimirlas.
+- **Cabeceras de caché largas** para `assets/` (`Cache-Control: max-age=31536000,
+  immutable`) y corta para `index.html`. Los CSS y JS ya se rompen con `?v=N`.
+- **HTTPS con HTTP/2**, que además hace barata la cantidad de imágenes.
+
+Antes de publicar conviene revisar: `<title>`, meta description, favicon
+y una imagen Open Graph, porque el enlace se va a compartir por WhatsApp.
+
+---
+
+## Ya corregido
+
+- El `<select>` de año tenía HTML malformado (`</option value="4">`), quedó
+  cortado cuando ChatGPT llegó a su límite de uso. Ya está arreglado: las
+  10 opciones abren y cierran bien.
+- Se apartaron 10 imágenes de versiones anteriores que ya no referencia
+  nadie (25 MB); están en `notas/assets-sin-usar/` por si acaso.
+- Se verificó que ninguna ruta de `index.html` o los CSS apunte a un
+  archivo que no exista.
+
+## Convenciones del proyecto
+
+- Las rutas de CSS y JS llevan `?v=N` para romper caché. Si cambias un
+  archivo, sube su número en `index.html`.
+- Cada imagen con texto tiene un equivalente accesible en el HTML. Si
+  cambias el arte, actualiza también ese texto.
+- Los textos de las propuestas describen mejoras **por hacer**, no cosas
+  ya implementadas. Mantener ese tiempo verbal: es una campaña, no un
+  informe de gestión.
+- El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
+  decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
+  su póster (`proposals-motion.js`, al final). No devolverle el atributo
+  `controls`.
