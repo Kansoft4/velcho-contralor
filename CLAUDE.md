@@ -158,6 +158,9 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
 - La propuesta 04 lleva una tercera (`.conv-anim`, prefijo `cv-`), de 4 escenas
   en 10 s y **después del texto**, no antes. El archivo original cambiaba el DOM
   con JavaScript; aquí las cuatro escenas van superpuestas y se turnan con CSS.
+- La propuesta 05 lleva la cuarta (`.cal-anim`, prefijo `cal-`), también de 4
+  escenas en 10 s y después del texto. Resumen: 02 y 03 van **antes** del
+  texto, 04 y 05 **después**.
 - El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
   decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
   su póster (`proposals-motion.js`, al final). No devolverle el atributo

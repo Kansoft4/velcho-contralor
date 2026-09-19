@@ -422,3 +422,101 @@
   .conv-anim .bucle i{animation:none;transform:scaleX(1)}
 }
 @keyframes cv-fade{0%{opacity:0}4%,25%{opacity:1}25.01%,100%{opacity:0}}
+
+/* ── Animación de la propuesta 05: 4 escenas en bucle de 10 s ──────────────
+   Misma técnica que .conv-anim (el original también rotaba el DOM con JS).
+   Prefijo cal- (calendario). */
+.cal-anim{--cal-dur:10s;--cal-bg:#ff6a00;--cal-ink:#0b2f77;--cal-purple:#4a0090;
+  position:relative;width:100%;aspect-ratio:1;container-type:inline-size;overflow:hidden;
+  background:repeating-linear-gradient(0deg,transparent 0 6.2cqw,#0b2f7714 6.2cqw,#0b2f7714 6.4cqw) var(--cal-bg);
+  font-family:Arial,Helvetica,sans-serif;margin:22px 0 4px}
+.cal-anim .esc{position:absolute;inset:0;padding:11cqw 9cqw 13cqw;display:flex;flex-direction:column;
+  justify-content:center;opacity:0;animation:cal-scene var(--cal-dur) linear infinite forwards}
+.cal-anim .esc-1{gap:6cqw}
+.cal-anim .esc-2{gap:6cqw;animation-delay:calc(var(--cal-dur)/4)}
+.cal-anim .esc-3{gap:7cqw;animation-delay:calc(var(--cal-dur)/2)}
+.cal-anim .esc-4{gap:8cqw;animation-delay:calc(var(--cal-dur)*3/4)}
+
+.cal-anim [data-cal]{animation-duration:var(--cal-dur);animation-iteration-count:infinite;animation-fill-mode:both;
+  animation-timing-function:cubic-bezier(.16,.9,.24,1)}
+.cal-anim .tit{margin:0;font:900 11cqw/1.02 Impact,"Arial Black",Arial,sans-serif;letter-spacing:-.035em;
+  color:var(--cal-ink);animation-name:cal-up}
+.cal-anim .tit span{color:var(--cal-purple)}
+
+/* escena 1 · todo el año a la vista */
+.cal-anim .meses{display:flex;flex-direction:column;gap:2.6cqw}
+.cal-anim .mes{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:3cqw;animation-name:cal-left}
+.cal-anim .mes:nth-child(1){animation-delay:.18s}
+.cal-anim .mes:nth-child(2){animation-delay:.3s}
+.cal-anim .mes:nth-child(3){animation-delay:.42s}
+.cal-anim .sigla{background:var(--cal-ink);color:var(--cal-bg);font:700 5cqw/1 monospace;letter-spacing:.06em;padding:1.6cqw 2cqw}
+.cal-anim .puntos{height:0;border-bottom:.4cqw dotted #0b2f7766}
+.cal-anim .evento{font:900 7cqw/1 Impact,"Arial Black",Arial,sans-serif;letter-spacing:-.02em;color:var(--cal-ink)}
+.cal-anim .mes.morado .sigla{background:var(--cal-purple)}
+.cal-anim .mes.morado .evento{color:var(--cal-purple)}
+
+/* escena 2 · los permisos, con tiempo */
+.cal-anim .esc-2 .tit{animation-delay:calc(var(--cal-dur)/4)}
+.cal-anim .aviso{display:flex;flex-direction:column;align-items:flex-start;gap:2cqw}
+.cal-anim .frase{margin:0;font:900 9cqw/1 Impact,"Arial Black",Arial,sans-serif;letter-spacing:-.02em;color:var(--cal-ink);
+  animation-name:cal-up;animation-delay:calc(var(--cal-dur)/4 + .2s)}
+.cal-anim .raya{align-self:stretch;height:.8cqw;background:var(--cal-ink);transform-origin:left center;margin:1.2cqw 0;
+  animation-name:cal-rule;animation-timing-function:cubic-bezier(.3,.9,.3,1);animation-delay:calc(var(--cal-dur)/4 + .38s)}
+.cal-anim .chapa{background:var(--cal-ink);color:var(--cal-bg);font:700 5.2cqw/1 monospace;letter-spacing:.04em;
+  padding:2.8cqw 3.4cqw;animation-name:cal-pop;animation-timing-function:cubic-bezier(.2,1.2,.3,1);
+  animation-delay:calc(var(--cal-dur)/4 + .52s)}
+
+/* escena 3 · cada sección pide lo suyo */
+.cal-anim .esc-3 .tit{animation-delay:calc(var(--cal-dur)/2)}
+.cal-anim .secciones{display:flex;flex-direction:column;gap:2.4cqw}
+.cal-anim .seccion{border:.7cqw solid var(--cal-ink);color:var(--cal-ink);font:700 5.2cqw/1 monospace;letter-spacing:.04em;
+  padding:3cqw;animation-name:cal-left}
+.cal-anim .seccion.lleno{border-color:var(--cal-purple);background:var(--cal-purple);color:var(--cal-bg)}
+.cal-anim .seccion:nth-child(1){animation-delay:calc(var(--cal-dur)/2 + .18s)}
+.cal-anim .seccion:nth-child(2){animation-delay:calc(var(--cal-dur)/2 + .3s)}
+.cal-anim .seccion:nth-child(3){animation-delay:calc(var(--cal-dur)/2 + .42s)}
+
+/* escena 4 · el año, planeado */
+.cal-anim .esc-4 .tit{font-size:13cqw;animation-delay:calc(var(--cal-dur)*3/4)}
+.cal-anim .tres{display:flex;gap:3cqw;align-items:stretch}
+.cal-anim .col{flex:1;text-align:center;border:.7cqw solid var(--cal-ink);color:var(--cal-ink);
+  font:700 5.2cqw/1 monospace;letter-spacing:.04em;padding:3.4cqw 1cqw;animation-name:cal-up}
+.cal-anim .col.lleno{background:var(--cal-ink);color:var(--cal-bg);
+  animation-name:cal-pop;animation-timing-function:cubic-bezier(.2,1.2,.3,1)}
+.cal-anim .col:nth-child(1){animation-delay:calc(var(--cal-dur)*3/4 + .18s)}
+.cal-anim .col:nth-child(2){animation-delay:calc(var(--cal-dur)*3/4 + .3s)}
+.cal-anim .col:nth-child(3){animation-delay:calc(var(--cal-dur)*3/4 + .42s)}
+
+/* flotación continua */
+.cal-anim .meses,.cal-anim .aviso,.cal-anim .tres{animation:cal-flota 2.6s ease-in-out infinite alternate}
+.cal-anim .secciones{animation:cal-flota 2.8s ease-in-out infinite alternate}
+
+/* barra del bucle: cuatro tramos por turnos */
+.cal-anim .bucle{position:absolute;left:0;right:0;bottom:0;height:1.4cqw;background:#0b2f7720;z-index:4;
+  display:flex;gap:.6cqw;padding:0 .6cqw;align-items:center}
+.cal-anim .bucle span{flex:1;height:.55cqw;overflow:hidden}
+.cal-anim .bucle i{display:block;height:100%;background:var(--cal-ink);transform-origin:left center;
+  animation-duration:var(--cal-dur);animation-timing-function:linear;animation-iteration-count:infinite;animation-fill-mode:both}
+.cal-anim .bucle span:nth-child(1) i{animation-name:cal-t1}
+.cal-anim .bucle span:nth-child(2) i{animation-name:cal-t2}
+.cal-anim .bucle span:nth-child(3) i{animation-name:cal-t3}
+.cal-anim .bucle span:nth-child(4) i{animation-name:cal-t4}
+
+@keyframes cal-scene{0%,25%{opacity:1}25.01%,100%{opacity:0}}
+@keyframes cal-up{0%{opacity:0;transform:translateY(3.2cqw)}5%,25%{opacity:1;transform:none}25.01%,100%{opacity:0;transform:translateY(3.2cqw)}}
+@keyframes cal-left{0%{opacity:0;transform:translateX(-7cqw)}4.5%,25%{opacity:1;transform:none}25.01%,100%{opacity:0;transform:translateX(-7cqw)}}
+@keyframes cal-pop{0%{opacity:0;transform:scale(.8)}3.1%{opacity:1;transform:scale(1.05)}5%,25%{opacity:1;transform:scale(1)}25.01%,100%{opacity:0;transform:scale(.8)}}
+@keyframes cal-rule{0%{transform:scaleX(0)}4%,25%{transform:scaleX(1)}25.01%,100%{transform:scaleX(0)}}
+@keyframes cal-fade{0%{opacity:0}4%,25%{opacity:1}25.01%,100%{opacity:0}}
+@keyframes cal-flota{0%{translate:0 .45cqw}100%{translate:0 -.45cqw}}
+@keyframes cal-t1{0%{transform:scaleX(0)}25%,100%{transform:scaleX(1)}}
+@keyframes cal-t2{0%,25%{transform:scaleX(0)}50%,100%{transform:scaleX(1)}}
+@keyframes cal-t3{0%,50%{transform:scaleX(0)}75%,100%{transform:scaleX(1)}}
+@keyframes cal-t4{0%,75%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+
+@media(prefers-reduced-motion:reduce){
+  .cal-anim [data-cal]{animation-name:cal-fade!important;transform:none!important}
+  .cal-anim .raya{transform:scaleX(1)}
+  .cal-anim .meses,.cal-anim .aviso,.cal-anim .secciones,.cal-anim .tres{animation:none;translate:none}
+  .cal-anim .bucle i{animation:none;transform:scaleX(1)}
+}
