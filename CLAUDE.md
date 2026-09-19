@@ -151,6 +151,10 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   retardos no. Los envoltorios sin entrada propia (`.ficha`, `.lista`,
   `.fichas`) flotan en bucle para que la escena nunca quede del todo quieta
   mientras se sostiene.
+- La propuesta 03 lleva otra igual (`.hoja-anim`), sobre papel rayado. Sus
+  keyframes van con prefijo `sh-` porque el archivo original reutilizaba los
+  nombres `pm-` con definiciones distintas y se habrían pisado con los de la
+  02. Si llega una animación nueva, darle su propio prefijo.
 - El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
   decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
   su póster (`proposals-motion.js`, al final). No devolverle el atributo

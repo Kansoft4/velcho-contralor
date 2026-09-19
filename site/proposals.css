@@ -242,3 +242,85 @@
 @media(prefers-reduced-motion:reduce){
   .plan-anim .ficha,.plan-anim .lista,.plan-anim .fichas{animation:none;translate:none}
 }
+
+/* ── Animación de la propuesta 03: 3 escenas en bucle de 12 s ──────────────
+   Misma técnica que .plan-anim, pero sobre papel rayado en vez de fondo azul.
+   Keyframes con prefijo sh- porque el archivo original reutilizaba los nombres
+   pm- con definiciones distintas y se pisaban entre sí. */
+.hoja-anim{--sh-dur:12s;--sh-ink:#0b2f77;--sh-paper:#eae5dc;--sh-purple:#4a0090;
+  position:relative;width:100%;aspect-ratio:1;container-type:inline-size;overflow:hidden;
+  background:repeating-linear-gradient(0deg,transparent 0 6.2cqw,#0b2f7714 6.2cqw,#0b2f7714 6.4cqw) var(--sh-paper);
+  font-family:Arial,Helvetica,sans-serif;margin:0 0 22px}
+.hoja-anim .esc{position:absolute;inset:0;padding:12cqw 9cqw 14cqw;display:flex;flex-direction:column;justify-content:center;
+  opacity:0;animation:sh-scene var(--sh-dur) linear infinite forwards}
+.hoja-anim .esc-1{gap:9cqw}
+.hoja-anim .esc-2{gap:8cqw;animation-delay:calc(var(--sh-dur)/3)}
+.hoja-anim .esc-3{gap:6cqw;animation-delay:calc(var(--sh-dur)*2/3)}
+
+.hoja-anim [data-sh]{animation-duration:var(--sh-dur);animation-iteration-count:infinite;animation-fill-mode:both;
+  animation-timing-function:cubic-bezier(.2,.8,.2,1)}
+
+.hoja-anim .tit{margin:0;font:900 12cqw/1.02 Impact,"Arial Black",Arial,sans-serif;letter-spacing:-.035em;
+  color:var(--sh-ink);animation-name:sh-up}
+.hoja-anim .tit span{color:var(--sh-purple)}
+
+/* escena 1 · la misma plantilla */
+.hoja-anim .chips{display:flex;gap:3cqw;align-items:stretch}
+.hoja-anim .chip{flex:1;text-align:center;border:.7cqw solid var(--sh-ink);color:var(--sh-ink);
+  font:700 5.2cqw/1 monospace;letter-spacing:.04em;padding:3.4cqw 1cqw;animation-name:sh-up}
+.hoja-anim .chip.lleno{border-color:var(--sh-purple);background:var(--sh-purple);color:var(--sh-paper)}
+.hoja-anim .chip:nth-child(1){animation-delay:.333s}
+.hoja-anim .chip:nth-child(2){animation-delay:.467s}
+.hoja-anim .chip:nth-child(3){animation-delay:.6s}
+
+/* escena 2 · el saldo se calcula solo */
+.hoja-anim .esc-2 .tit{animation-delay:calc(var(--sh-dur)/3)}
+.hoja-anim .suma{display:flex;flex-direction:column;align-items:flex-end;gap:2cqw}
+.hoja-anim .mov{font:900 11cqw/1 Impact,"Arial Black",Arial,sans-serif;letter-spacing:-.02em;color:var(--sh-ink);
+  animation-name:sh-left}
+.hoja-anim .mov.resta{color:var(--sh-purple)}
+.hoja-anim .suma .mov:nth-child(1){animation-delay:calc(var(--sh-dur)/3 + .367s)}
+.hoja-anim .suma .mov:nth-child(2){animation-delay:calc(var(--sh-dur)/3 + .567s)}
+.hoja-anim .raya{align-self:stretch;height:.8cqw;background:var(--sh-ink);transform-origin:right center;margin:1.4cqw 0;
+  animation-name:sh-rule;animation-timing-function:cubic-bezier(.3,.9,.3,1);animation-delay:calc(var(--sh-dur)/3 + .667s)}
+.hoja-anim .total{background:var(--sh-ink);color:var(--sh-paper);font:900 13cqw/1 Impact,"Arial Black",Arial,sans-serif;
+  letter-spacing:-.02em;padding:2cqw 3cqw;animation-name:sh-pop;animation-delay:calc(var(--sh-dur)/3 + .867s)}
+
+/* escena 3 · todos igual, todo se compara */
+.hoja-anim .esc-3 .tit{font-size:11cqw;animation-delay:calc(var(--sh-dur)*2/3)}
+.hoja-anim .salones{display:flex;flex-direction:column;gap:3cqw}
+.hoja-anim .salon{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:3cqw;animation-name:sh-left}
+.hoja-anim .salon:nth-child(1){animation-delay:calc(var(--sh-dur)*2/3 + .333s)}
+.hoja-anim .salon:nth-child(2){animation-delay:calc(var(--sh-dur)*2/3 + .467s)}
+.hoja-anim .salon:nth-child(3){animation-delay:calc(var(--sh-dur)*2/3 + .6s)}
+.hoja-anim .curso{background:var(--sh-ink);color:var(--sh-paper);font:700 5cqw/1 monospace;letter-spacing:.06em;padding:1.6cqw 2cqw}
+.hoja-anim .puntos{height:0;border-bottom:.4cqw dotted #0b2f7766}
+.hoja-anim .monto{font:900 7.4cqw/1 Impact,"Arial Black",Arial,sans-serif;letter-spacing:-.02em;color:var(--sh-ink)}
+.hoja-anim .cierre{margin:0;font:900 6.4cqw/1.05 Impact,"Arial Black",Arial,sans-serif;letter-spacing:-.02em;
+  color:var(--sh-purple);animation-name:sh-up;animation-delay:calc(var(--sh-dur)*2/3 + .733s)}
+
+/* barra del bucle */
+.hoja-anim .bucle{position:absolute;left:0;right:0;bottom:0;height:1.4cqw;background:#0b2f7720;z-index:4}
+.hoja-anim .bucle i{display:block;height:100%;background:var(--sh-purple);transform-origin:left center;transform:scaleX(0);
+  animation:sh-loop var(--sh-dur) linear infinite}
+
+/* flotación continua: los envoltorios sin entrada propia */
+.hoja-anim .chips,.hoja-anim .suma,.hoja-anim .salones{animation:sh-flota 4.8s ease-in-out infinite}
+.hoja-anim .suma{animation-duration:5.4s}
+.hoja-anim .salones{animation-duration:6s}
+
+@keyframes sh-scene{0%,33.3%{opacity:1}33.31%,100%{opacity:0}}
+@keyframes sh-up{0%{opacity:0;transform:translateY(3.5cqw)}2.4%,33.3%{opacity:1;transform:none}33.31%,100%{opacity:0;transform:translateY(3.5cqw)}}
+@keyframes sh-pop{0%{opacity:0;transform:scale(.9)}2.6%,33.3%{opacity:1;transform:scale(1)}33.31%,100%{opacity:0;transform:scale(.9)}}
+@keyframes sh-left{0%{opacity:0;transform:translateX(-5cqw)}2.5%,33.3%{opacity:1;transform:none}33.31%,100%{opacity:0;transform:translateX(-5cqw)}}
+@keyframes sh-rule{0%,5%{transform:scaleX(0)}14%,100%{transform:scaleX(1)}}
+@keyframes sh-fade{0%{opacity:0}2.5%,33.3%{opacity:1}33.31%,100%{opacity:0}}
+@keyframes sh-loop{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+@keyframes sh-flota{0%,100%{translate:0 0}50%{translate:0 -1.1cqw}}
+
+@media(prefers-reduced-motion:reduce){
+  .hoja-anim [data-sh]{animation-name:sh-fade!important;transform:none!important}
+  .hoja-anim .raya{transform:scaleX(1)}
+  .hoja-anim .bucle i{animation:none;transform:scaleX(1)}
+  .hoja-anim .chips,.hoja-anim .suma,.hoja-anim .salones{animation:none;translate:none}
+}
