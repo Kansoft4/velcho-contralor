@@ -140,13 +140,17 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   a transparente), no con CSS.
 - Los símbolos `↗ ↘ ↙ ✳` llevan `&#xFE0E;` detrás. Sin eso, iOS los pinta como
   emoji a color. Si se agrega otra flecha de ese rango, ponerle el mismo sufijo.
-- La propuesta 02 lleva una animación CSS de 3 escenas en bucle de 18 s
+- La propuesta 02 lleva una animación CSS de 3 escenas en bucle de 12 s
   (`.plan-anim`, al final de `proposals.css`). Sin JS ni imágenes; las medidas
   van en `cqw` sobre un contenedor cuadrado. Dos trampas si se edita: sus
   titulares son `<div>` y no `<p>`, porque `.proposal .proposal-detail p` del
   sitio le impone `line-height:1.55` y descuadra las escenas; y `[data-pm]` no
   debe llevar `opacity:0`, porque la barra de progreso solo anima `transform`
-  y quedaría invisible.
+  y quedaría invisible. Si se cambia `--pm-dur`, hay que escalar a mano los
+  `animation-delay` en segundos: los keyframes van en % y escalan solos, los
+  retardos no. Los envoltorios sin entrada propia (`.ficha`, `.lista`,
+  `.fichas`) flotan en bucle para que la escena nunca quede del todo quieta
+  mientras se sostiene.
 - El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
   decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
   su póster (`proposals-motion.js`, al final). No devolverle el atributo

@@ -146,7 +146,7 @@
    CSS puro, sin JS ni imágenes. Las medidas van en cqw para que escale con
    el ancho del contenedor. Respeta prefers-reduced-motion: las escenas se
    cruzan con un fundido simple y la barra de progreso se queda quieta. */
-.plan-anim{--pm-dur:18s;--pm-card:#0b2f77;--pm-paper:#eae5dc;--pm-yellow:#ffc400;--pm-orange:#ff6a00;--pm-purple:#4a0090;
+.plan-anim{--pm-dur:12s;--pm-card:#0b2f77;--pm-paper:#eae5dc;--pm-yellow:#ffc400;--pm-orange:#ff6a00;--pm-purple:#4a0090;
   position:relative;width:100%;aspect-ratio:1;container-type:inline-size;overflow:hidden;background:var(--pm-card);
   font-family:Arial,Helvetica,sans-serif;margin:0 0 22px}
 .plan-anim .esc{position:absolute;inset:0;padding:9cqw 8cqw 12cqw;display:flex;flex-direction:column;justify-content:center;
@@ -166,17 +166,17 @@
 /* escena 1 · la meta */
 .plan-anim .ficha{transform:rotate(-1.4deg)}
 .plan-anim .ficha>div{background:var(--pm-paper);color:var(--pm-card);padding:4.5cqw 5cqw 5cqw;
-  box-shadow:1.8cqw 2cqw 0 var(--pm-orange);animation-name:pm-pop;animation-delay:.25s}
-.plan-anim .barra-grupo{animation-name:pm-up;animation-delay:.45s}
+  box-shadow:1.8cqw 2cqw 0 var(--pm-orange);animation-name:pm-pop;animation-delay:0.167s}
+.plan-anim .barra-grupo{animation-name:pm-up;animation-delay:0.3s}
 .plan-anim .barra-grupo .rotulo{display:flex;justify-content:flex-end;color:var(--pm-yellow);margin-bottom:2cqw}
 .plan-anim .barra{position:relative;height:4.2cqw;background:#ffffff24}
 .plan-anim .barra i{position:absolute;inset:0;background:var(--pm-orange);transform-origin:left center;
   animation-name:pm-bar;animation-timing-function:cubic-bezier(.3,.9,.3,1)}
 .plan-anim .barra u{position:absolute;top:-2cqw;bottom:-2cqw;right:0;width:1cqw;background:var(--pm-yellow)}
-.plan-anim .esc-1 .tit{animation-delay:.65s}
+.plan-anim .esc-1 .tit{animation-delay:0.433s}
 
 /* escena 2 · el año con presupuesto */
-.plan-anim .esc-2 .tit{animation-delay:calc(var(--pm-dur)/3 + .2s)}
+.plan-anim .esc-2 .tit{animation-delay:calc(var(--pm-dur)/3 + 0.133s)}
 .plan-anim .lista{display:flex;flex-direction:column}
 .plan-anim .fila{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:2.6cqw;padding:2.8cqw 0;
   border-bottom:1px solid #ffffff33;animation-name:pm-left}
@@ -184,21 +184,21 @@
 .plan-anim .mes{background:var(--pm-yellow);color:var(--pm-card);font:700 4.3cqw/1 monospace;letter-spacing:.08em;padding:1.7cqw 2cqw}
 .plan-anim .qué{font:700 4.6cqw/1.1 Arial,Helvetica,sans-serif;color:var(--pm-paper);letter-spacing:-.01em}
 .plan-anim .plata{font:900 6.2cqw/1 Impact,"Arial Black",Arial,sans-serif;letter-spacing:-.02em;color:var(--pm-yellow)}
-.plan-anim .fila:nth-child(1){animation-delay:calc(var(--pm-dur)/3 + .5s)}
-.plan-anim .fila:nth-child(2){animation-delay:calc(var(--pm-dur)/3 + .7s)}
-.plan-anim .fila:nth-child(3){animation-delay:calc(var(--pm-dur)/3 + .9s)}
-.plan-anim .fila:nth-child(4){animation-delay:calc(var(--pm-dur)/3 + 1.1s)}
+.plan-anim .fila:nth-child(1){animation-delay:calc(var(--pm-dur)/3 + 0.333s)}
+.plan-anim .fila:nth-child(2){animation-delay:calc(var(--pm-dur)/3 + 0.467s)}
+.plan-anim .fila:nth-child(3){animation-delay:calc(var(--pm-dur)/3 + 0.6s)}
+.plan-anim .fila:nth-child(4){animation-delay:calc(var(--pm-dur)/3 + 0.733s)}
 
 /* escena 3 · las cuentas antes y después */
-.plan-anim .esc-3 .tit{font-size:8.8cqw;animation-delay:calc(var(--pm-dur)*2/3 + .2s)}
+.plan-anim .esc-3 .tit{font-size:8.8cqw;animation-delay:calc(var(--pm-dur)*2/3 + 0.133s)}
 .plan-anim .fichas{display:flex;flex-direction:column;gap:3cqw}
 .plan-anim .tarjeta{background:var(--pm-paper);color:var(--pm-card);padding:3.2cqw 3.6cqw 3.6cqw;display:flex;
   flex-direction:column;gap:2.4cqw;box-shadow:1.2cqw 1.4cqw 0 #00000038;animation-name:pm-pop}
 .plan-anim .tarjeta>span{font:700 4.2cqw/1 monospace;letter-spacing:.12em}
 .plan-anim .antes{transform:rotate(-1.1deg)}
-.plan-anim .antes .tarjeta{animation-delay:calc(var(--pm-dur)*2/3 + .45s)}
+.plan-anim .antes .tarjeta{animation-delay:calc(var(--pm-dur)*2/3 + 0.3s)}
 .plan-anim .después{transform:rotate(1.1deg)}
-.plan-anim .después .tarjeta{animation-delay:calc(var(--pm-dur)*2/3 + .7s)}
+.plan-anim .después .tarjeta{animation-delay:calc(var(--pm-dur)*2/3 + 0.467s)}
 .plan-anim .después .tarjeta>span{color:var(--pm-purple)}
 .plan-anim .dato{display:grid;gap:3cqw;margin:0}
 .plan-anim .dato.dos{grid-template-columns:1fr 1fr}
@@ -208,7 +208,7 @@
 .plan-anim .sello{position:absolute;right:7cqw;bottom:4.5cqw;background:var(--pm-yellow);color:var(--pm-card);
   font:900 6cqw/1 Impact,"Arial Black",Arial,sans-serif;letter-spacing:.02em;padding:2.2cqw 3cqw;
   box-shadow:1.1cqw 1.2cqw 0 #00000045;animation-name:pm-stamp;animation-timing-function:cubic-bezier(.2,.9,.2,1);
-  animation-delay:calc(var(--pm-dur)*2/3 + .95s)}
+  animation-delay:calc(var(--pm-dur)*2/3 + 0.633s)}
 
 /* barra de progreso del bucle */
 .plan-anim .bucle{position:absolute;left:0;right:0;bottom:0;height:1.4cqw;background:#ffffff1f;z-index:4}
@@ -228,4 +228,17 @@
   .plan-anim [data-pm]{animation-name:pm-fade!important;transform:none!important}
   .plan-anim .barra i{transform:scaleX(1)}
   .plan-anim .bucle i{animation:none;transform:scaleX(1)}
+}
+
+/* Cada escena entra y luego se sostiene ~5 s. Para que nunca quede totalmente
+   quieta, los bloques de contenido flotan despacio de forma continua. Se anima
+   la propiedad `translate`, no `transform`, para no pisar las rotaciones. */
+.plan-anim .ficha,
+.plan-anim .lista,
+.plan-anim .fichas{animation:pm-flota 4.5s ease-in-out infinite}
+.plan-anim .lista{animation-duration:5.2s}
+.plan-anim .fichas{animation-duration:5.8s}
+@keyframes pm-flota{0%,100%{translate:0 0}50%{translate:0 -1.1cqw}}
+@media(prefers-reduced-motion:reduce){
+  .plan-anim .ficha,.plan-anim .lista,.plan-anim .fichas{animation:none;translate:none}
 }
