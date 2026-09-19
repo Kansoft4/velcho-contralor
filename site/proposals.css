@@ -520,3 +520,11 @@
   .cal-anim .meses,.cal-anim .aviso,.cal-anim .secciones,.cal-anim .tres{animation:none;translate:none}
   .cal-anim .bucle i{animation:none;transform:scaleX(1)}
 }
+
+/* Las dos propuestas de una misma fila comparten altura, pero su contenido no:
+   el desplegable quedaba a distinta altura en cada una. La tarjeta pasa a ser
+   columna flexible y el <details> se empuja al fondo, así los dos se alinean.
+   En una sola columna no hay espacio sobrante, así que no cambia nada. */
+.proposal-goals,.proposal-ledger,.proposal-shopping,.proposal-calendar{display:flex;flex-direction:column}
+.proposal-goals>details,.proposal-ledger>details,
+.proposal-shopping>details,.proposal-calendar>details{margin-top:auto}

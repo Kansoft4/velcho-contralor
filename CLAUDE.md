@@ -161,6 +161,12 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
 - La propuesta 05 lleva la cuarta (`.cal-anim`, prefijo `cal-`), también de 4
   escenas en 10 s y después del texto. Resumen: 02 y 03 van **antes** del
   texto, 04 y 05 **después**.
+- En escritorio las propuestas van de a dos por fila y sus `<details>` deben
+  quedar a la misma altura: las cuatro pareadas (`goals`, `ledger`, `shopping`,
+  `calendar`) son columna flexible con `margin-top:auto` en el `details`. **No
+  aplicar esa regla a `.proposal` en general**: la 01 (`proposal-board`) y la 06
+  (`proposal-credit`) son de ancho completo con `display:grid` a dos columnas
+  internas, y una regla genérica se las pisa y les duplica el alto.
 - El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
   decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
   su póster (`proposals-motion.js`, al final). No devolverle el atributo
