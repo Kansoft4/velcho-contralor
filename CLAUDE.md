@@ -161,12 +161,16 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
 - La propuesta 05 lleva la cuarta (`.cal-anim`, prefijo `cal-`), también de 4
   escenas en 10 s y después del texto. Resumen: 02 y 03 van **antes** del
   texto, 04 y 05 **después**.
-- En escritorio las propuestas van de a dos por fila y sus `<details>` deben
-  quedar a la misma altura: las cuatro pareadas (`goals`, `ledger`, `shopping`,
-  `calendar`) son columna flexible con `margin-top:auto` en el `details`. **No
-  aplicar esa regla a `.proposal` en general**: la 01 (`proposal-board`) y la 06
-  (`proposal-credit`) son de ancho completo con `display:grid` a dos columnas
-  internas, y una regla genérica se las pisa y les duplica el alto.
+- En escritorio las propuestas van de a dos por fila y sus `<details>` quedan
+  alineados con **`grid-template-rows:subgrid`** en las cuatro pareadas
+  (`goals`/`ledger` con `span 4`, `shopping`/`calendar` con `span 5`: cada par
+  tiene el mismo número de hijos). Si se agrega o quita un hijo a una de ellas,
+  hay que ajustar el `span` de las dos.
+  Dos caminos que **no** funcionan y ya se probaron: `margin-top:auto` en el
+  `details` alinea con ambas cerradas, pero al abrir una la otra crece y su
+  resumen se va hasta el fondo; y aplicar la regla a `.proposal` en general pisa
+  a la 01 (`proposal-board`) y la 06 (`proposal-credit`), que son de ancho
+  completo con `display:grid` a dos columnas internas, y les duplica el alto.
 - El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
   decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
   su póster (`proposals-motion.js`, al final). No devolverle el atributo

@@ -525,6 +525,17 @@
    el desplegable quedaba a distinta altura en cada una. La tarjeta pasa a ser
    columna flexible y el <details> se empuja al fondo, así los dos se alinean.
    En una sola columna no hay espacio sobrante, así que no cambia nada. */
-.proposal-goals,.proposal-ledger,.proposal-shopping,.proposal-calendar{display:flex;flex-direction:column}
-.proposal-goals>details,.proposal-ledger>details,
-.proposal-shopping>details,.proposal-calendar>details{margin-top:auto}
+/* (alineación de desplegables: ver regla más abajo) */
+
+/* Alinear los desplegables de las dos propuestas de una misma fila.
+   Cada par tiene el mismo número de hijos (02/03 → 4, 04/05 → 5), así que con
+   subgrid comparten las filas de la rejilla: el rótulo queda a la altura del
+   rótulo, el titular del titular y el <details> del <details>, estén abiertos
+   o cerrados. Empujar el desplegable al fondo con margin-top:auto NO sirve:
+   al abrir una, la otra crece y su resumen se va hasta abajo. */
+@supports(grid-template-rows:subgrid){
+  @media(min-width:701px){
+    .proposal-goals,.proposal-ledger{display:grid;grid-template-rows:subgrid;grid-row:span 4}
+    .proposal-shopping,.proposal-calendar{display:grid;grid-template-rows:subgrid;grid-row:span 5}
+  }
+}
