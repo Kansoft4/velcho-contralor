@@ -324,3 +324,101 @@
   .hoja-anim .bucle i{animation:none;transform:scaleX(1)}
   .hoja-anim .chips,.hoja-anim .suma,.hoja-anim .salones{animation:none;translate:none}
 }
+
+/* ── Animación de la propuesta 04: 4 escenas en bucle de 10 s ──────────────
+   El archivo original cambiaba el DOM con JavaScript; aquí las cuatro escenas
+   van superpuestas y se turnan con CSS. Prefijo cv- (convenio). */
+.conv-anim{--cv-dur:10s;--cv-bg:#4a0090;--cv-paper:#eae5dc;--cv-yellow:#ffc400;--cv-orange:#ff6a00;
+  position:relative;width:100%;aspect-ratio:1;container-type:inline-size;overflow:hidden;
+  background:repeating-linear-gradient(0deg,transparent 0 6.2cqw,#eae5dc14 6.2cqw,#eae5dc14 6.4cqw) var(--cv-bg);
+  font-family:Arial,Helvetica,sans-serif;margin:22px 0 4px}
+.conv-anim .esc{position:absolute;inset:0;padding:11cqw 9cqw 13cqw;display:flex;flex-direction:column;
+  justify-content:center;opacity:0;animation:cv-scene var(--cv-dur) linear infinite forwards}
+.conv-anim .esc-1{gap:5.5cqw}
+.conv-anim .esc-2{gap:5cqw;animation-delay:calc(var(--cv-dur)/4)}
+.conv-anim .esc-3{gap:8cqw;animation-delay:calc(var(--cv-dur)/2)}
+.conv-anim .esc-4{gap:7cqw;animation-delay:calc(var(--cv-dur)*3/4)}
+
+.conv-anim [data-cv]{animation-duration:var(--cv-dur);animation-iteration-count:infinite;animation-fill-mode:both;
+  animation-timing-function:cubic-bezier(.16,.9,.24,1)}
+.conv-anim .tit{margin:0;font:900 12cqw/1.02 Impact,"Arial Black",Arial,sans-serif;letter-spacing:-.035em;
+  color:var(--cv-paper);animation-name:cv-up}
+.conv-anim .tit span{color:var(--cv-yellow)}
+
+/* escena 1 · consigo el precio, no compro */
+.conv-anim .esc-1 .tit{font-size:11cqw}
+.conv-anim .cuentas{display:flex;flex-direction:column;gap:2.6cqw}
+.conv-anim .cuenta{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:3cqw;animation-name:cv-left}
+.conv-anim .cuenta:nth-child(1){animation-delay:.18s}
+.conv-anim .cuenta:nth-child(2){animation-delay:.3s}
+.conv-anim .cuenta:nth-child(3){animation-delay:.42s}
+.conv-anim .num{background:var(--cv-paper);color:var(--cv-bg);font:700 5cqw/1 monospace;letter-spacing:.06em;padding:1.6cqw 2cqw}
+.conv-anim .puntos{height:0;border-bottom:.4cqw dotted #eae5dc66}
+.conv-anim .qué{font:900 7.4cqw/1 Impact,"Arial Black",Arial,sans-serif;letter-spacing:-.02em;color:var(--cv-paper)}
+.conv-anim .cuenta.destaca .num{background:var(--cv-orange);color:var(--cv-paper)}
+.conv-anim .cuenta.destaca .qué{color:var(--cv-orange)}
+
+/* escena 2 · nadie pone de su bolsillo */
+.conv-anim .esc-2 .tit{font-size:13cqw;animation-delay:calc(var(--cv-dur)/4)}
+.conv-anim .sello{align-self:flex-start;border:.7cqw solid var(--cv-orange);color:var(--cv-orange);
+  font:700 5.2cqw/1 monospace;letter-spacing:.04em;padding:3cqw 4cqw;
+  animation-name:cv-pop;animation-timing-function:cubic-bezier(.2,1.2,.3,1);animation-delay:calc(var(--cv-dur)/4 + .28s)}
+
+/* escena 3 · se negocia una sola vez */
+.conv-anim .esc-3 .tit{animation-delay:calc(var(--cv-dur)/2)}
+.conv-anim .pasos{display:flex;gap:3cqw;align-items:stretch}
+.conv-anim .paso{flex:1;text-align:center;border:.7cqw solid var(--cv-paper);color:var(--cv-paper);
+  font:700 5.2cqw/1 monospace;letter-spacing:.04em;padding:3.4cqw 1cqw;animation-name:cv-up}
+.conv-anim .paso.lleno{border-color:var(--cv-yellow);background:var(--cv-yellow);color:var(--cv-bg);
+  animation-name:cv-pop;animation-timing-function:cubic-bezier(.2,1.2,.3,1)}
+.conv-anim .paso:nth-child(1){animation-delay:calc(var(--cv-dur)/2 + .18s)}
+.conv-anim .paso:nth-child(2){animation-delay:calc(var(--cv-dur)/2 + .3s)}
+.conv-anim .paso:nth-child(3){animation-delay:calc(var(--cv-dur)/2 + .42s)}
+
+/* escena 4 · el ahorro se publica */
+.conv-anim .esc-4 .tit{animation-delay:calc(var(--cv-dur)*3/4)}
+.conv-anim .resta{display:flex;flex-direction:column;align-items:flex-end;gap:1.6cqw}
+.conv-anim .linea{font:900 10cqw/1 Impact,"Arial Black",Arial,sans-serif;letter-spacing:-.02em;color:var(--cv-paper);
+  animation-name:cv-right}
+.conv-anim .linea.naranja{color:var(--cv-orange)}
+.conv-anim .resta .linea:nth-child(1){animation-delay:calc(var(--cv-dur)*3/4 + .2s)}
+.conv-anim .resta .linea:nth-child(2){animation-delay:calc(var(--cv-dur)*3/4 + .34s)}
+.conv-anim .raya{align-self:stretch;height:.8cqw;background:var(--cv-paper);transform-origin:right center;margin:1.2cqw 0;
+  animation-name:cv-rule;animation-timing-function:cubic-bezier(.3,.9,.3,1);animation-delay:calc(var(--cv-dur)*3/4 + .5s)}
+.conv-anim .ahorro{background:var(--cv-yellow);color:var(--cv-bg);font:900 13cqw/1 Impact,"Arial Black",Arial,sans-serif;
+  letter-spacing:-.02em;padding:2cqw 3cqw;
+  animation-name:cv-pop;animation-timing-function:cubic-bezier(.2,1.2,.3,1);animation-delay:calc(var(--cv-dur)*3/4 + .66s)}
+
+/* flotación continua de los envoltorios sin entrada propia */
+.conv-anim .cuentas,.conv-anim .pasos,.conv-anim .resta{animation:cv-flota 2.6s ease-in-out infinite alternate}
+
+/* barra del bucle: cuatro tramos que se llenan por turnos */
+.conv-anim .bucle{position:absolute;left:0;right:0;bottom:0;height:1.4cqw;background:#eae5dc20;z-index:4;
+  display:flex;gap:.6cqw;padding:0 .6cqw;align-items:center}
+.conv-anim .bucle span{flex:1;height:.55cqw;overflow:hidden}
+.conv-anim .bucle i{display:block;height:100%;background:var(--cv-yellow);transform-origin:left center;
+  animation-duration:var(--cv-dur);animation-timing-function:linear;animation-iteration-count:infinite;animation-fill-mode:both}
+.conv-anim .bucle span:nth-child(1) i{animation-name:cv-t1}
+.conv-anim .bucle span:nth-child(2) i{animation-name:cv-t2}
+.conv-anim .bucle span:nth-child(3) i{animation-name:cv-t3}
+.conv-anim .bucle span:nth-child(4) i{animation-name:cv-t4}
+
+@keyframes cv-scene{0%,25%{opacity:1}25.01%,100%{opacity:0}}
+@keyframes cv-up{0%{opacity:0;transform:translateY(3.2cqw)}5%,25%{opacity:1;transform:none}25.01%,100%{opacity:0;transform:translateY(3.2cqw)}}
+@keyframes cv-left{0%{opacity:0;transform:translateX(-7cqw)}4.5%,25%{opacity:1;transform:none}25.01%,100%{opacity:0;transform:translateX(-7cqw)}}
+@keyframes cv-right{0%{opacity:0;transform:translateX(7cqw)}4.5%,25%{opacity:1;transform:none}25.01%,100%{opacity:0;transform:translateX(7cqw)}}
+@keyframes cv-pop{0%{opacity:0;transform:scale(.8)}3.1%{opacity:1;transform:scale(1.05)}5%,25%{opacity:1;transform:scale(1)}25.01%,100%{opacity:0;transform:scale(.8)}}
+@keyframes cv-rule{0%{transform:scaleX(0)}4%,25%{transform:scaleX(1)}25.01%,100%{transform:scaleX(0)}}
+@keyframes cv-flota{0%{translate:0 .45cqw}100%{translate:0 -.45cqw}}
+@keyframes cv-t1{0%{transform:scaleX(0)}25%,100%{transform:scaleX(1)}}
+@keyframes cv-t2{0%,25%{transform:scaleX(0)}50%,100%{transform:scaleX(1)}}
+@keyframes cv-t3{0%,50%{transform:scaleX(0)}75%,100%{transform:scaleX(1)}}
+@keyframes cv-t4{0%,75%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+
+@media(prefers-reduced-motion:reduce){
+  .conv-anim [data-cv]{animation-name:cv-fade!important;transform:none!important}
+  .conv-anim .raya{transform:scaleX(1)}
+  .conv-anim .cuentas,.conv-anim .pasos,.conv-anim .resta{animation:none;translate:none}
+  .conv-anim .bucle i{animation:none;transform:scaleX(1)}
+}
+@keyframes cv-fade{0%{opacity:0}4%,25%{opacity:1}25.01%,100%{opacity:0}}
