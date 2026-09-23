@@ -199,11 +199,9 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   de foreignObject), quita la barra de reproducción y arranca siempre en 0.
   Trampa: el runtime marca también `<html>` con `data-om-starter`, así que el
   CSS que oculta la barra va acotado a `#lienzo`.
-  `tablero.js` carga el iframe al acercarse, lo arranca al entrar en pantalla,
-  hace el efecto de tarjeta → ancho completo y maneja «Ver en pantalla
-  completa» (API del navegador; en iPhone, que no la tiene para elementos, un
-  modo propio que gira el tráiler 90° en vertical). Con `prefers-reduced-motion`
-  no arranca solo: muestra «Reproducir el tráiler». Umami: evento `tablero`
-  (`reproducir`, `pantalla-completa`).
+  `tablero.js` carga el iframe al acercarse, lo arranca al entrar en pantalla y
+  hace el efecto de tarjeta → ancho completo. **Sin botón de pantalla completa**:
+  Sebastián lo pidió quitar. Con `prefers-reduced-motion` no arranca solo:
+  muestra «Reproducir el tráiler». Umami: evento `tablero` (`reproducir`).
   Sin el video, la 01 va en dos columnas: título a la izquierda, texto y
   desplegable a la derecha.

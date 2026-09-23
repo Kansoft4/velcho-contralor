@@ -2,8 +2,6 @@
    - Carga el iframe cuando la sección se acerca (no antes: no pesa en la carga inicial).
    - Le avisa que arranque cuando ya está en pantalla, para que se vea desde el principio.
    - Al entrar crece de tarjeta a ancho completo.
-   - «Ver en pantalla completa»: API del navegador; en iPhone, donde no existe para
-     elementos, un modo propio que ocupa toda la pantalla y gira el tráiler.
    - Con prefers-reduced-motion no arranca solo: muestra un botón para reproducirlo.
    Sin JavaScript la sección queda oculta (atributo hidden). */
 (() => {
@@ -11,8 +9,6 @@
   if (!fig) return;
   const marco = fig.querySelector('.tablero-marco');
   const iframe = marco.querySelector('iframe');
-  const boton = fig.querySelector('.tablero-grande');
-  const cerrar = fig.querySelector('.tablero-cerrar');
   const reproducir = fig.querySelector('.tablero-reproducir');
   const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const medir = (e, d) => window.medir?.(e, d);
@@ -45,7 +41,6 @@
     let cuadro = 0;
     const pintar = () => {
       cuadro = 0;
-      if (fig.classList.contains('grande')) return;
       const r = fig.getBoundingClientRect(), alto = innerHeight;
       const p = Math.min(1, Math.max(0, (alto - r.top) / (alto * .75)));
       marco.style.setProperty('--t-s', (.88 + .12 * p).toFixed(4));
@@ -57,30 +52,4 @@
     pintar();
   }
 
-  // Pantalla completa.
-  const salirPropio = () => {
-    fig.classList.remove('grande');
-    document.documentElement.classList.remove('sin-scroll');
-  };
-  async function agrandar() {
-    cargar(); if (reducido) reproducir.hidden = true; visible = true; arrancar();
-    medir('tablero', {accion: 'pantalla-completa'});
-    if (document.fullscreenEnabled && marco.requestFullscreen) {
-      try {
-        await marco.requestFullscreen({navigationUI: 'hide'});
-        try { await screen.orientation?.lock?.('landscape'); } catch {}
-        return;
-      } catch {}
-    }
-    fig.classList.add('grande');
-    document.documentElement.classList.add('sin-scroll');
-    cerrar.focus();
-  }
-  boton.addEventListener('click', agrandar);
-  marco.addEventListener('click', e => { if (e.target === marco && !fig.classList.contains('grande')) agrandar(); });
-  cerrar.addEventListener('click', () => { salirPropio(); boton.focus(); });
-  addEventListener('keydown', e => { if (e.key === 'Escape' && fig.classList.contains('grande')) { salirPropio(); boton.focus(); } });
-  document.addEventListener('fullscreenchange', () => {
-    if (!document.fullscreenElement) { try { screen.orientation?.unlock?.(); } catch {} }
-  });
 })();

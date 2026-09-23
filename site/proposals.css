@@ -556,38 +556,18 @@
 /* ── Tráiler del tablero (iframe tablero/, compilado desde notas/tablero/) ──
    Ancho completo en 16:9. Al entrar en pantalla crece desde una tarjeta con
    esquinas redondeadas hasta ocupar todo el ancho (tablero.js mueve --t-s y
-   --t-r). En celular se ve pequeño, así que hay botón de pantalla completa:
-   usa la API del navegador y, donde no existe (iPhone), un modo propio que
-   gira el tráiler para aprovechar el alto del teléfono. */
+   --t-r). */
 .tablero-trailer{grid-column:1/-1;margin:0;background:var(--blue);padding:0 0 34px;
-  display:flex;flex-direction:column;align-items:center;gap:22px;overflow:hidden}
+  display:flex;flex-direction:column;align-items:center;overflow:hidden}
 .tablero-trailer[hidden]{display:none}
 .tablero-marco{position:relative;width:min(100%,calc(100svh*16/9));aspect-ratio:16/9;background:#fff;
   scale:var(--t-s,1);border-radius:var(--t-r,0px);overflow:hidden;transform-origin:center top;
   box-shadow:0 30px 60px #0b122040}
 .tablero-marco iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;pointer-events:none}
-.tablero-grande,.tablero-reproducir{display:inline-flex;align-items:center;gap:10px;border:0;cursor:pointer;
+.tablero-reproducir{display:inline-flex;align-items:center;gap:10px;border:0;cursor:pointer;
   border-radius:999px;font:700 12px/1.2 monospace;letter-spacing:.14em;text-transform:uppercase;padding:12px 20px}
-.tablero-grande{background:var(--yellow,#ffc400);color:var(--blue)}
-.tablero-grande svg{width:18px;height:18px}
 .tablero-reproducir{position:absolute;left:50%;top:50%;translate:-50% -50%;background:var(--blue);color:#fff}
 .tablero-reproducir svg{width:20px;height:20px;fill:currentColor}
 .tablero-reproducir[hidden]{display:none}
-.tablero-grande:focus-visible,.tablero-reproducir:focus-visible,.tablero-cerrar:focus-visible{outline:3px solid #fff;outline-offset:3px}
-.tablero-cerrar{display:none}
+.tablero-reproducir:focus-visible{outline:3px solid #fff;outline-offset:3px}
 
-/* modo pantalla completa propio (iPhone) */
-html.sin-scroll{overflow:hidden}
-.tablero-trailer.grande{position:fixed;inset:0;z-index:100;background:#0b1220;padding:0;justify-content:center}
-/* !important: tablero.js pone la escala del efecto de entrada en línea, y en línea gana */
-.tablero-trailer.grande .tablero-marco{scale:1!important;border-radius:0!important;transform-origin:center;
-  width:min(100vw,calc(100svh*16/9));box-shadow:none}
-.tablero-trailer.grande .tablero-grande{display:none}
-.tablero-trailer.grande .tablero-cerrar{display:grid;place-items:center;position:fixed;top:14px;right:14px;z-index:2;
-  width:44px;height:44px;border:0;border-radius:50%;background:#ffffff26;color:#fff;cursor:pointer}
-.tablero-trailer.grande .tablero-cerrar svg{width:22px;height:22px}
-@media(orientation:portrait){
-  .tablero-trailer.grande .tablero-marco{width:min(100svh,calc(100vw*16/9));rotate:90deg}
-}
-/* en pantalla completa real el marco llena la pantalla sin la animación de entrada */
-.tablero-marco:fullscreen{scale:1!important;border-radius:0!important;width:100%;height:100%;aspect-ratio:auto;box-shadow:none}
