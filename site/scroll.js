@@ -103,7 +103,8 @@
     const frase = document.querySelector('.statement-section');
     return frase ? frase.getBoundingClientRect().top+scrollY : start+distance;
   };
-  function detenerDemo(){
+  function detenerDemo(ev){
+    if (ev && demoActiva) window.medir?.('demo-hero', {estado:'interrumpida'});
     demoActiva = false;
     for (const e of INTERRUPCIONES) removeEventListener(e,detenerDemo);
   }
@@ -112,12 +113,14 @@
     if (reduced.matches || scrollY > TOLERANCIA) return;
     const desde = scrollY, hasta = destino(), t0 = performance.now();
     demoActiva = true;
+    window.medir?.('demo-hero', {estado:'inicio'});
     for (const e of INTERRUPCIONES) addEventListener(e,detenerDemo,{passive:true});
     (function paso(ahora){
       if (!demoActiva) return;
       const t = Math.min(1,(ahora-t0)/DURACION);
       scrollTo(0,desde+(hasta-desde)*suave(t));
-      if (t < 1) requestAnimationFrame(paso); else detenerDemo();
+      if (t < 1) requestAnimationFrame(paso);
+      else { window.medir?.('demo-hero', {estado:'completa'}); detenerDemo(); }
     })(t0);
   }
   function armar(){ clearTimeout(espera); if (!document.hidden) espera = setTimeout(demo,DEMORA); }

@@ -181,6 +181,14 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   pulso y flecha que rebota (`styles.css`, al final); se centra con la propiedad
   `translate`, no con `transform`, y en celular la firma sube a `bottom:90px`
   para no quedar pegada.
+- **Métricas: Umami Cloud** (sin cookies, sin datos personales). Script en el
+  `<head>` con `async` —para no frenar los scripts del sitio— y
+  `data-domains="kansoft4.github.io"`, así las pruebas en local no cuentan.
+  Eventos propios en `metricas.js`: `llego-a` (frase, historias, propuestas,
+  formulario; una vez por visita), `abrir-propuesta` (01–06); en `scroll.js`:
+  `demo-hero` (inicio, completa, interrumpida); en `feedback.js`:
+  `idea-enviada` con **solo el año**. Nunca mandar el nombre ni el texto del
+  formulario. El panel es de la cuenta de Sebastián en cloud.umami.is.
 - El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
   decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
   su póster (`proposals-motion.js`, al final). No devolverle el atributo

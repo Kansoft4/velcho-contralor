@@ -48,6 +48,7 @@ const FEEDBACK_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzv_4030gQYlI
       form.reset();
       count.textContent = '0';
       status.textContent = '¡Tu idea llegó! Gracias por contarme.';
+      window.medir?.('idea-enviada', {anio: payload.year});   // solo el año, nunca el nombre ni el texto
     } catch {
       status.textContent = 'No pudimos confirmar el envío. Tu texto sigue aquí; puedes intentar de nuevo.';
     } finally {
