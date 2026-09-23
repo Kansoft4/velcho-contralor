@@ -181,6 +181,12 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   pulso y flecha que rebota (`styles.css`, al final); se centra con la propiedad
   `translate`, no con `transform`, y en celular la firma sube a `bottom:90px`
   para no quedar pegada.
+- **Páginas ocultas** en `site/p/<código al azar>/`: no las enlaza nada del sitio y
+  llevan `noindex`. Solo las ve quien tenga el enlace, **pero el repositorio es
+  público**, así que cualquiera que revise GitHub puede encontrarlas. No poner
+  ahí nada que no pueda ver cualquiera. No agregar `robots.txt` con esas rutas:
+  las publicaría. Hoy: `p/4u71ka286f/` — póster «Juntos rinde más», para un
+  correo (el JPG es para clientes de correo que no leen WebP).
 - **Métricas: Umami Cloud** (sin cookies, sin datos personales). Script en el
   `<head>` con `async` —para no frenar los scripts del sitio— y
   `data-domains="kansoft4.github.io"`, así las pruebas en local no cuentan.
