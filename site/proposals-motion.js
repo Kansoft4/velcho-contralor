@@ -63,24 +63,4 @@
   reduced.addEventListener('change', () => {
     if (reduced.matches) section.getAnimations({subtree: true}).forEach(animation => animation.cancel());
   });
-  /* El video ya no lleva controles: es decoración en bucle, sin sonido. Como
-     nadie puede pausarlo a mano, se queda en su póster cuando el sistema pide
-     menos movimiento, igual que el resto de las animaciones. */
-  const demo = section.querySelector('.accounts-demo');
-  if (demo) {
-    const ajustarDemo = () => {
-      if (reduced.matches) {
-        // load() reinicia el elemento y vuelve a mostrar el póster. Congelarlo
-        // en el segundo 0 no sirve: el primer cuadro del video está en blanco.
-        demo.removeAttribute('autoplay');
-        demo.pause();
-        demo.load();
-      } else {
-        demo.setAttribute('autoplay', '');
-        demo.play().catch(() => {});
-      }
-    };
-    ajustarDemo();
-    reduced.addEventListener('change', ajustarDemo);
-  }
 })();

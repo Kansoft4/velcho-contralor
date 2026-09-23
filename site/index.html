@@ -26,12 +26,13 @@
 
   <link rel="stylesheet" href="styles.css?v=20">
   <link rel="stylesheet" href="art-direction.css?v=20">
-  <link rel="stylesheet" href="proposals.css?v=32">
+  <link rel="stylesheet" href="proposals.css?v=34">
   <link rel="stylesheet" href="feedback.css?v=24">
   <script src="scroll.js?v=16" defer></script>
   <script src="story-scroll.js?v=14" defer></script>
-  <script src="proposals-motion.js?v=23" defer></script>
+  <script src="proposals-motion.js?v=24" defer></script>
   <script src="feedback.js?v=27" defer></script>
+  <script src="tablero.js?v=1" defer></script>
   <script src="metricas.js?v=1" defer></script>
   <!-- Umami: analítica sin cookies. data-domains evita contar las pruebas en local. -->
   <script async src="https://cloud.umami.is/script.js" data-website-id="6798d214-a1d9-4ef3-8e9e-0169010c0a6d" data-domains="kansoft4.github.io"></script>
@@ -147,13 +148,16 @@
             <p>La plata de tu salón, en una sola pantalla: cuánto hay, qué se compró y cuánto falta. No es una idea para después: el tablero ya está construido.</p>
             <details><summary>¿Cómo funciona?<span aria-hidden="true">+</span></summary><div class="proposal-detail"><p>Está listo para el primer día. Son cuatro vistas.</p><p><strong>Salones.</strong> Lo recaudado entre los 27 salones en una sola cifra y, debajo, cada salón con su barra de avance hacia su meta.</p><p><strong>Ficha del salón.</strong> Cuánto lleva, cuánto falta, quién ha aportado y en qué se gastó: decoración de Halloween, actividad de diciembre, pizza. Cada gasto con su recibo y el saldo que queda disponible.</p><p><strong>Ranking.</strong> Los salones ordenados por porcentaje de avance, no por cuánta plata tienen, y separados por sección. Así un salón pequeño le puede ganar a uno grande.</p><p><strong>Control.</strong> La vista del colegio: disponible hoy, recaudado frente a gastado y cuánto se ha ejecutado. Todo es de solo lectura; nadie puede editar las cuentas de otro salón.</p></div></details>
           </div>
-          <div class="board-art board-video">
-            <video class="accounts-demo" width="1080" height="1080" autoplay loop muted playsinline preload="metadata" poster="assets/proposals/cuentas-demo-poster.webp" aria-label="Demostración del tablero de cuentas">
-              <source src="assets/proposals/cuentas-demo.mp4" type="video/mp4">
-              <a href="assets/proposals/cuentas-demo.mp4">Ver demostración del tablero de cuentas</a>
-            </video>
-          </div>
         </article>
+        <figure class="tablero-trailer" id="tablero" hidden>
+          <div class="tablero-marco">
+            <iframe data-src="tablero/?v=1" title="Tráiler del tablero de cuentas" aria-hidden="true" tabindex="-1" allow="fullscreen"></iframe>
+            <button class="tablero-reproducir" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Reproducir el tráiler</span></button>
+          </div>
+          <button class="tablero-grande" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.4"/></svg><span>Ver en pantalla completa</span></button>
+          <button class="tablero-cerrar" type="button" aria-label="Cerrar pantalla completa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></button>
+          <figcaption class="sr-only">Tráiler del tablero «Que la plata se vea», que ya está construido: el ranking de salones por sección, el total recaudado entre los 27 salones, la ficha de un salón con lo que lleva, los aportes y los gastos, el control con lo disponible y en qué se gasta la plata del colegio, y las votaciones.</figcaption>
+        </figure>
         <article class="proposal proposal-goals" aria-labelledby="proposal-02">
           <p class="proposal-label">02 / UNA IDEA QUE SÍ TENGA PLAN</p>
           <h3 id="proposal-02" class="proposal-title-art"><span class="sr-only">Primero la meta.</span><img src="assets/proposals/titulo-meta.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async"></h3>

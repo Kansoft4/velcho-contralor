@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Tráiler del tablero — Que la plata se vea</title>
+<!-- Se muestra dentro de un iframe en index.html. Fuente y cómo recompilar: notas/tablero/. -->
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;height:100%;background:#fff;overflow:hidden}
+  #lienzo{position:relative;width:100%;height:100%}
+  /* reproductor del editor → solo el lienzo: sin fondo negro, sin barra, sin avisos */
+  /* ojo: el runtime también marca <html> con data-om-starter; por eso va acotado a #lienzo */
+  #lienzo [data-om-starter]{background:#fff!important}
+  #lienzo [data-om-starter]>:not(:first-child),[data-om-unknown-cues]{display:none!important}
+</style>
+<script>
+  window.OM_SCENES = '[{"name":"Hook","dur":1.9,"desc":"Tres preguntas golpean la pantalla"},{"name":"Intro","dur":2,"desc":"La marca aparece y una línea explica para qué sirve"},{"name":"Leaderboard","dur":5.2,"desc":"Ranking por sección"},{"name":"Salones","dur":6.4,"desc":"Cortina 02 · total y semáforo de los 27 salones"},{"name":"Click","dur":1.2,"desc":"El cursor abre 7°C"},{"name":"Ficha","dur":7.6,"desc":"Lleva, aportes, gastos y disponible"},{"name":"Control","dur":6.6,"desc":"Cortina 03 · disponible, gastos y eventos"},{"name":"Votaciones","dur":8.8,"desc":"Cortina 04 · encuestas y voto en vivo"},{"name":"Outro","dur":3.6,"desc":"La marca vuelve al centro y cierra"}]';
+  window.OM_PLAYBACK = '{"mode":"loop"}';
+  window.TWEAK_DEFAULTS = {"motionEditor": false};
+</script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+<script src="trailer.js?v=1"></script>
+</head>
+<body>
+<div id="lienzo"></div>
+<script>
+  /* Dentro del sitio espera a que la página avise que el tráiler ya está en pantalla,
+     para que arranque desde el principio justo cuando alguien lo ve. Abierta sola,
+     arranca de una. */
+  (() => {
+    let listo = false;
+    const montar = () => {
+      if (listo) return; listo = true;
+      ReactDOM.createRoot(document.getElementById('lienzo')).render(React.createElement(window.TrailerWowApp));
+    };
+    if (window.parent === window) montar();
+    else addEventListener('message', e => { if (e.origin === location.origin && e.data === 'tablero:reproducir') montar(); });
+  })();
+</script>
+</body>
+</html>

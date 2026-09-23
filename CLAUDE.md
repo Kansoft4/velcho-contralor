@@ -127,7 +127,7 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   ya implementadas. Mantener ese tiempo verbal: es una campaña, no un
   informe de gestión. **Excepción: la propuesta 01** (el tablero) va en
   presente y su desplegable dice «¿Cómo funciona?», porque el tablero ya
-  está construido — el video de esa propuesta es el real.
+  está construido — el tráiler de debajo lo muestra.
 - El contenido de las seis propuestas sale de los PDF de campaña de
   Sebastián. Si vuelve a mandar una versión nueva, mandan esos PDF: han
   cambiado de una versión a otra (por ejemplo, en la 04 pasó de «reúno los
@@ -189,7 +189,21 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   `demo-hero` (inicio, completa, interrumpida); en `feedback.js`:
   `idea-enviada` con **solo el año**. Nunca mandar el nombre ni el texto del
   formulario. El panel es de la cuenta de Sebastián en cloud.umami.is.
-- El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
-  decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
-  su póster (`proposals-motion.js`, al final). No devolverle el atributo
-  `controls`.
+- **Tráiler del tablero**, a pantalla completa justo debajo de la propuesta 01
+  (reemplazó el video `cuentas-demo.mp4`, que quedó en `notas/assets-sin-usar/`).
+  Es la composición «Trailer wow» de Claude Design, **compilada** para el sitio:
+  `site/tablero/` (iframe) se genera con `bun notas/tablero/compilar.ts` desde
+  `notas/tablero/fuente/`. El original compilaba JSX en el navegador con Babel
+  (~3 MB); compilado pesa ~25 KB comprimido. El compilador además cambia el
+  lienzo de `<svg><foreignObject>` a `<div>` (Safari pinta mal lo animado dentro
+  de foreignObject), quita la barra de reproducción y arranca siempre en 0.
+  Trampa: el runtime marca también `<html>` con `data-om-starter`, así que el
+  CSS que oculta la barra va acotado a `#lienzo`.
+  `tablero.js` carga el iframe al acercarse, lo arranca al entrar en pantalla,
+  hace el efecto de tarjeta → ancho completo y maneja «Ver en pantalla
+  completa» (API del navegador; en iPhone, que no la tiene para elementos, un
+  modo propio que gira el tráiler 90° en vertical). Con `prefers-reduced-motion`
+  no arranca solo: muestra «Reproducir el tráiler». Umami: evento `tablero`
+  (`reproducir`, `pantalla-completa`).
+  Sin el video, la 01 va en dos columnas: título a la izquierda, texto y
+  desplegable a la derecha.
