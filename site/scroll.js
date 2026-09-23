@@ -1,4 +1,6 @@
-/* Native scroll: no dependencies, timers, wheel interception or scroll hijacking.
+/* Native scroll: no dependencies, wheel interception or scroll hijacking. The one
+   exception is the idle demo at the end: if nobody scrolls in 10 s, the page
+   scrolls itself once, slowly, and any touch, wheel or key hands control back.
    Portrait/signature use the original poster. Each headline row is an independent
    transparent PNG, so the Q tail moves with QUE LA and never leaks into PLATA. */
 (() => {
@@ -88,4 +90,49 @@
   addEventListener('pageshow',measure);
   new ResizeObserver(measure).observe(poster);
   measure();
+
+  // Demo por inactividad: hay quien no sabe que la página se desliza. Si en 10 s
+  // nadie ha hecho scroll, baja sola —despacio, para que se vea la animación— y
+  // aterriza en la frase. Cualquier toque, rueda o tecla la detiene al instante.
+  // Una sola vez por visita; nada de esto con prefers-reduced-motion.
+  const DEMORA = 10000, DURACION = 5500, TOLERANCIA = 40;
+  const INTERRUPCIONES = ['wheel','touchstart','pointerdown','keydown'];
+  let espera = 0, demoActiva = false;
+  const suave = t => -(Math.cos(Math.PI*t)-1)/2;
+  const destino = () => {
+    const frase = document.querySelector('.statement-section');
+    return frase ? frase.getBoundingClientRect().top+scrollY : start+distance;
+  };
+  function detenerDemo(){
+    demoActiva = false;
+    for (const e of INTERRUPCIONES) removeEventListener(e,detenerDemo);
+  }
+  function demo(){
+    desarmar();
+    if (reduced.matches || scrollY > TOLERANCIA) return;
+    const desde = scrollY, hasta = destino(), t0 = performance.now();
+    demoActiva = true;
+    for (const e of INTERRUPCIONES) addEventListener(e,detenerDemo,{passive:true});
+    (function paso(ahora){
+      if (!demoActiva) return;
+      const t = Math.min(1,(ahora-t0)/DURACION);
+      scrollTo(0,desde+(hasta-desde)*suave(t));
+      if (t < 1) requestAnimationFrame(paso); else detenerDemo();
+    })(t0);
+  }
+  function armar(){ clearTimeout(espera); if (!document.hidden) espera = setTimeout(demo,DEMORA); }
+  function alDeslizar(){ if (scrollY > TOLERANCIA) desarmar(); }
+  function alCambiarVisibilidad(){ document.hidden ? clearTimeout(espera) : armar(); }
+  function desarmar(){
+    clearTimeout(espera);
+    removeEventListener('scroll',alDeslizar);
+    removeEventListener('keydown',desarmar);
+    document.removeEventListener('visibilitychange',alCambiarVisibilidad);
+  }
+  if (!reduced.matches && scrollY <= TOLERANCIA) {
+    addEventListener('scroll',alDeslizar,{passive:true});
+    addEventListener('keydown',desarmar);          // quien navega con teclado ya sabe moverse
+    document.addEventListener('visibilitychange',alCambiarVisibilidad);
+    armar();
+  }
 })();

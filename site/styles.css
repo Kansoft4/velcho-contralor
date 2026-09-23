@@ -127,3 +127,10 @@
 @media(prefers-reduced-motion:reduce){
  .scroll-scene{height:100svh}.sprite{will-change:auto}.wipe,.scene-meter,.scroll-cue{display:none}
 }
+
+/* Pista de scroll: la flecha rebota a partir de los 2,5 s. Se desvanece sola en
+   cuanto empieza el scroll (scroll.js baja la opacidad del cue). */
+@media(prefers-reduced-motion:no-preference){
+  .scroll-cue span:last-child{display:inline-block;animation:cue-rebote 1.4s ease-in-out 2.5s infinite}
+}
+@keyframes cue-rebote{0%,100%{transform:translateY(0)}45%{transform:translateY(9px)}}

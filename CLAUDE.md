@@ -171,6 +171,13 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   resumen se va hasta el fondo; y aplicar la regla a `.proposal` en general pisa
   a la 01 (`proposal-board`) y la 06 (`proposal-credit`), que son de ancho
   completo con `display:grid` a dos columnas internas, y les duplica el alto.
+- **Demo del hero por inactividad** (`scroll.js`, al final): si en 10 s nadie
+  ha hecho scroll, la página baja sola en ~5,5 s, con curva suave para que se
+  vea la animación, y aterriza en la frase (`.statement-section`). Se detiene
+  al instante con cualquier toque, rueda, clic o tecla; no se arma si el
+  usuario ya deslizó, si la página abre fuera de arriba o con
+  `prefers-reduced-motion`; el reloj se pausa con la pestaña oculta; una sola
+  vez por visita. La flecha del cue rebota desde los 2,5 s (`styles.css`).
 - El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
   decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
   su póster (`proposals-motion.js`, al final). No devolverle el atributo
