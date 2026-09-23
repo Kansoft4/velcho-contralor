@@ -177,7 +177,10 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   al instante con cualquier toque, rueda, clic o tecla; no se arma si el
   usuario ya deslizó, si la página abre fuera de arriba o con
   `prefers-reduced-motion`; el reloj se pausa con la pestaña oculta; una sola
-  vez por visita. La flecha del cue rebota desde los 2,5 s (`styles.css`).
+  vez por visita. El cue «DESLIZA PARA VER» es una pastilla azul centrada con
+  pulso y flecha que rebota (`styles.css`, al final); se centra con la propiedad
+  `translate`, no con `transform`, y en celular la firma sube a `bottom:90px`
+  para no quedar pegada.
 - El video de la propuesta 01 va **sin controles**, en bucle y sin sonido: es
   decoración, no un reproductor. Con `prefers-reduced-motion` se queda quieto en
   su póster (`proposals-motion.js`, al final). No devolverle el atributo

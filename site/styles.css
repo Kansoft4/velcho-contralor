@@ -128,9 +128,26 @@
  .scroll-scene{height:100svh}.sprite{will-change:auto}.wipe,.scene-meter,.scroll-cue{display:none}
 }
 
-/* Pista de scroll: la flecha rebota a partir de los 2,5 s. Se desvanece sola en
-   cuanto empieza el scroll (scroll.js baja la opacidad del cue). */
-@media(prefers-reduced-motion:no-preference){
-  .scroll-cue span:last-child{display:inline-block;animation:cue-rebote 1.4s ease-in-out 2.5s infinite}
+/* Pista de scroll: centrada, en pastilla azul, con un pulso que se expande y la
+   flecha rebotando. Hay visitantes que no sabían que la página se desliza.
+   La opacidad la sigue manejando scroll.js: se desvanece al empezar el scroll.
+   Se centra con `translate` (propiedad aparte) para no chocar con nada que
+   anime `transform`. */
+.scroll-cue{left:50%;right:auto;bottom:24px;width:max-content;translate:-50% 0;z-index:6;
+  display:inline-flex;align-items:center;gap:12px;padding:12px 20px 12px 22px;border-radius:999px;
+  background:var(--blue);color:var(--paper);font:700 13px/1.2 monospace;letter-spacing:.16em;
+  box-shadow:0 6px 18px #192bb440}
+.scroll-cue span:last-child{display:inline-block;font:700 20px/1 Arial}
+@media(max-width:650px){
+  .scroll-cue{bottom:22px;left:50%;right:auto;font-size:12px;padding:11px 18px 11px 20px}
+  .mobile-signature{bottom:90px}
 }
-@keyframes cue-rebote{0%,100%{transform:translateY(0)}45%{transform:translateY(9px)}}
+@media(prefers-reduced-motion:no-preference){
+  .scroll-cue{animation:cue-pulso 1.8s ease-out 1s infinite}
+  .scroll-cue span:last-child{animation:cue-rebote 1s ease-in-out .6s infinite}
+}
+@keyframes cue-pulso{
+  0%{box-shadow:0 6px 18px #192bb440,0 0 0 0 #192bb499}
+  70%{box-shadow:0 6px 18px #192bb440,0 0 0 16px #192bb400}
+  100%{box-shadow:0 6px 18px #192bb440,0 0 0 0 #192bb400}}
+@keyframes cue-rebote{0%,100%{transform:translateY(-2px)}50%{transform:translateY(5px)}}
