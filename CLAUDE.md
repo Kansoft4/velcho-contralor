@@ -185,8 +185,9 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   llevan `noindex`. Solo las ve quien tenga el enlace, **pero el repositorio es
   público**, así que cualquiera que revise GitHub puede encontrarlas. No poner
   ahí nada que no pueda ver cualquiera. No agregar `robots.txt` con esas rutas:
-  las publicaría. Hoy: `p/4u71ka286f/` — póster «Juntos rinde más», para un
-  correo (el JPG es para clientes de correo que no leen WebP).
+  las publicaría. Hoy: `p/4u71ka286f/` — póster «Juntos rinde más»;
+  `p/ammfpydvac/` — póster «Que la plata se vea» (azul, con la mascota). Ambos
+  para correos: el JPG es para clientes de correo que no leen WebP.
 - **Métricas: Umami Cloud** (sin cookies, sin datos personales). Script en el
   `<head>` con `async` —para no frenar los scripts del sitio— y
   `data-domains="kansoft4.github.io"`, así las pruebas en local no cuentan.
