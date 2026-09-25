@@ -186,7 +186,8 @@ y `canonical` en `index.html`, que hoy apuntan a la URL de GitHub Pages.
   público**, así que cualquiera que revise GitHub puede encontrarlas. No poner
   ahí nada que no pueda ver cualquiera. No agregar `robots.txt` con esas rutas:
   las publicaría. Hoy: `p/4u71ka286f/` — póster «Juntos rinde más»;
-  `p/ammfpydvac/` — póster «Que la plata se vea» (azul, con la mascota). Ambos
+  `p/ammfpydvac/` — póster «Que la plata se vea» (azul, con la mascota);
+  `p/iqnetx1zf1/` — póster «Todos votamos por Vélez» (las dos mascotas). Todos
   para correos: el JPG es para clientes de correo que no leen WebP.
 - **Métricas: Umami Cloud** (sin cookies, sin datos personales). Script en el
   `<head>` con `async` —para no frenar los scripts del sitio— y
